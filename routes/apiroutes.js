@@ -1,34 +1,15 @@
-const Workout = require('../models/workout');
+const router = require("express").Router();
 
-module.exports = function (app) {
-    app.get('/api/workouts', function (req, res) {
-        Workout.find()
-            .then(function (data) {
-                console.log(data);
-                res.json(data);
-            });
-    });
+const {
+    addWorkout,
+    addExercise,
+    getWorkouts
+} = require("../controller/WorkoutController");
 
-    app.post('/api/workouts', function (req, res) {
-        console.log(req.body);
+router.route("/api/workouts").get(getWorkouts).post(addWorkout);
 
-        Workout.create({})
-            .then(function (data) {
-                res.json(data);
-            });
-    });
+router.route("/api/workouts/:id").put(addExercise);
 
-    app.put('/api/workout/:id', function (req, res) {
-        Workout.findByIdAndUpdate(req.params.id, { $push: { exercises: req.body } })
-            .then(function (data) {
-                res.json(data);
-            });
-    });
+router.route("/api/workouts/range").get(getWorkouts);
 
-    app.get('/api/workouts/range', function (req, res) {
-        Workout.find()
-            .then(function (data) {
-                res.json(data);
-            });
-    });
-}
+module.exports = router;

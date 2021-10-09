@@ -5,22 +5,7 @@ mongoose.connect('mongodb://localhost/workoutDB', {
   useNewUrlParser: true,
   useFindAndModify: false,
   useUnifiedTopology: true,
-  useCreateIndex: true,
-}).then(() => {
-  db.Workout.deleteMany({})
-    .then((data) => {
-      return db.Workout.collection.insertMany(workoutSeed)
-    })
-    .then((data) => {
-      console.log(data.result.n + ' records inserted!');
-      process.exit(0);
-    })
-    .catch((err) => {
-      console.error(err);
-      process.exit(1);
-    });
 });
-
 const workoutSeed = [
   {
     day: new Date(new Date().setDate(new Date().getDate() - 9)),
