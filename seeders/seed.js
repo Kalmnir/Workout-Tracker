@@ -11,9 +11,7 @@ connect(connectionString, {
   useFindAndModify: false,
 }).then(() => {
   db.Workout.deleteMany({})
-    .then((data) => {
-      return db.Workout.collection.insertMany(workoutSeed)
-    })
+    .then(() => db.Workout.collection.insertMany(workoutSeed))
     .then((data) => {
       console.log(data.result.n + ' records inserted!');
       process.exit(0);
@@ -142,13 +140,13 @@ const workoutSeed = [
   },
 ];
 
-db.Workout.deleteMany({})
-  .then(() => db.Workout.collection.insertMany(workoutSeed))
-  .then((data) => {
-    console.log(data.result.n + ' records inserted!');
-    process.exit(0);
-  })
-  .catch((err) => {
-    console.error(err);
-    process.exit(1);
-  });
+// db.Workout.deleteMany({})
+//   .then(() => db.Workout.collection.insertMany(workoutSeed))
+//   .then((data) => {
+//     console.log(data.result.n + ' records inserted!');
+//     process.exit(0);
+//   })
+//   .catch((err) => {
+//     console.error(err);
+//     process.exit(1);
+//   });
