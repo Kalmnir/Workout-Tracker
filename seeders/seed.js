@@ -5,6 +5,7 @@ mongoose.connect('mongodb://localhost/workoutDB', {
   useNewUrlParser: true,
   useFindAndModify: false,
   useUnifiedTopology: true,
+  useCreateIndex: true,
 }).then(() => {
   db.Workout.deleteMany({})
     .then((data) => {
