@@ -1,19 +1,12 @@
-const { connect, connection } = require('mongoose');
 const mongoose = require('mongoose');
 const db = require('../models');
 
-const connectionString = process.env.MONGODB_URI || 'mongodb://localhost/workoutDB'
-
-connect(connectionString, {
+mongoose.connect('mongodb://localhost/workoutDB', {
   useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
   useFindAndModify: false,
+  useUnifiedTopology: true,
 }).then(() => {
   db.Workout.deleteMany({})
-    .then((data) => {
-      return db.Workout.collection.insertMany(workoutSeed)
-    })
     .then((data) => {
       console.log(data.result.n + ' records inserted!');
       process.exit(0);
